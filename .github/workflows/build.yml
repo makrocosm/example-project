@@ -1,0 +1,21 @@
+name: Build firmware and disk images
+on:
+  push:
+    branches: [ "main" ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+    - name: Enable containerd image store
+      run: |
+        sudo sh -c "echo '{ \"features\": { \"containerd-snapshotter\": true } }' > /etc/docker/daemon.json"
+        sudo systemctl restart docker
+    - name: Install dependencies
+      run: make deps
+    - name: Build
+      run: make VERBOSE=1
+    - name: Prepare release files
+      run: make release
