@@ -1,0 +1,44 @@
+#!/bin/sh
+#
+# Installs both BIOS and EFI Grub bootloaders.
+# Expected to be called as a kernel init in a VM during disk image creation. 
+#
+
+echo "Loading drivers..."
+modprobe virtio_blk
+
+echo "Mounting required filesystems..."
+mount -t proc proc /proc
+mount -t sysfs sys /sys
+mdev -s
+
+DISK=/dev/vda
+echo "Partitions on $DISK:"
+PARTITIONS="$(parted --script -- "${DISK}" print)"
+echo "$PARTITIONS"
+
+BOOTENV_DEV="${DISK}$(echo "$PARTITIONS" | grep -w bootenv | awk '{ print $1 }')"
+echo "Mounting Grub partition ${BOOTENV_DEV}..."
+mount -t vfat ${BOOTENV_DEV} /boot/grub
+
+EFI_DEV="${DISK}$(echo "$PARTITIONS" | grep -w efi | awk '{ print $1 }')"
+echo "Mounting EFI partition ${EFI_DEV}..."
+mount -t vfat ${EFI_DEV} /efi
+
+# Installs Grub to disk MBR and modules to /boot/grub
+echo "Installing BIOS bootloader..."
+grub-install --target=i386-pc \
+  --removable --recheck \
+  --bootloader-id=grub \
+  "$DISK"
+
+# Installs EFI program to /efi and modules to /boot/grub
+echo "Installing EFI bootloader..."
+grub-install --target=x86_64-efi \
+  --removable --recheck \
+  --bootloader-id=grub \
+  --efi-directory=/efi \
+  "$DISK"
+
+echo "Bootloader install complete"
+poweroff -f

@@ -1,0 +1,66 @@
+From 7410f5b55bb7b9772fcdf699b56d5d434f9fb2d2 Mon Sep 17 00:00:00 2001
+From: David Oberhollenzer <goliath@infraroot.at>
+Date: Sun, 25 Dec 2022 11:05:24 +0100
+Subject: [PATCH] fs/squashfs: Only use export table if available
+
+For a squashfs filesystem, the fragment table is followed by
+the following tables: NFS export table, ID table, xattr table.
+
+The export and xattr tables are both completely optional, but
+the ID table is mandatory. The Linux implementation refuses to
+mount the image if the ID table is missing. Tables that are no
+present have their location in the super block set
+to 0xFFFFFFFFFFFFFFFF.
+
+The u-boot implementation previously assumed that it can always
+rely on the export table location as an upper bound for the fragment
+table, trying (and failing) to read past filesystem bounds if it
+is not present.
+
+This patch changes the driver to use the ID table instead and only
+use the export table location if it lies between the two.
+
+Signed-off-by: David Oberhollenzer <goliath@infraroot.at>
+Reviewed-by: Miquel Raynal <miquel.raynal@bootlin.com>
+---
+ fs/squashfs/sqfs.c | 16 +++++++++++-----
+ 1 file changed, 11 insertions(+), 5 deletions(-)
+
+diff --git a/fs/squashfs/sqfs.c b/fs/squashfs/sqfs.c
+index 92ab8ac631..fb4cb4e154 100644
+--- a/fs/squashfs/sqfs.c
++++ b/fs/squashfs/sqfs.c
+@@ -99,7 +99,7 @@ static int sqfs_calc_n_blks(__le64 start, __le64 end, u64 *offset)
+ static int sqfs_frag_lookup(u32 inode_fragment_index,
+ 			    struct squashfs_fragment_block_entry *e)
+ {
+-	u64 start, n_blks, src_len, table_offset, start_block;
++	u64 start, end, exp_tbl, n_blks, src_len, table_offset, start_block;
+ 	unsigned char *metadata_buffer, *metadata, *table;
+ 	struct squashfs_fragment_block_entry *entries;
+ 	struct squashfs_super_block *sblk = ctxt.sblk;
+@@ -114,11 +114,17 @@ static int sqfs_frag_lookup(u32 inode_fragment_index,
+ 	if (inode_fragment_index >= get_unaligned_le32(&sblk->fragments))
+ 		return -EINVAL;
+ 
+-	start = get_unaligned_le64(&sblk->fragment_table_start) /
+-		ctxt.cur_dev->blksz;
++	start = get_unaligned_le64(&sblk->fragment_table_start);
++	end = get_unaligned_le64(&sblk->id_table_start);
++	exp_tbl = get_unaligned_le64(&sblk->export_table_start);
++
++	if (exp_tbl > start && exp_tbl < end)
++		end = exp_tbl;
++
+ 	n_blks = sqfs_calc_n_blks(sblk->fragment_table_start,
+-				  sblk->export_table_start,
+-				  &table_offset);
++				  cpu_to_le64(end), &table_offset);
++
++	start /= ctxt.cur_dev->blksz;
+ 
+ 	/* Allocate a proper sized buffer to store the fragment index table */
+ 	table = malloc_cache_aligned(n_blks * ctxt.cur_dev->blksz);
+-- 
+2.34.1
+

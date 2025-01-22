@@ -1,0 +1,6 @@
+LABEL=bootenv   /boot/grub     vfat       defaults 0 0
+LABEL=efi       /efi           vfat       defaults 0 0
+LABEL=config    /mnt/config    ext4       defaults 0 0
+LABEL=userdata  /mnt/userdata  ext4       defaults 0 0
+tmpfs           /tmp           tmpfs      defaults,nosuid,nodev,noatime,mode=0755,size=256M 0 0
+overlay         /etc           overlay    defaults,lowerdir=/etc,upperdir=/mnt/config/etc,workdir=/mnt/config/overlay 0 0

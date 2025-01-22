@@ -1,0 +1,3 @@
+[submodule "makrocosm"]
+	path = makrocosm
+	url = https://github.com/makrocosm/makrocosm.git
