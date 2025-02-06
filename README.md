@@ -6,13 +6,13 @@ build system to create minimal Alpine-based firmware for a variety of platforms.
 Supported platforms:
 
  - Generic x64
-  - BIOS and EFI Grub bootloader
-  - Disk image can be written to USB flash, harddrive, etc, and booted on real hardware
-  - Disk image can be booted in VM
+   - BIOS and EFI Grub bootloader
+   - Disk image can be written to USB flash, harddrive, etc, and booted on real hardware
+   - Disk image can be booted in VM
  - Orange Pi One (ARM)
-  - u-boot bootloader
-  - Disk image can be written to SD card and booted on real hardware
-  - Disk image can be booted in VM
+   - u-boot bootloader
+   - Disk image can be written to SD card and booted on real hardware
+   - Disk image can be booted in VM
 
 Common features:
 
