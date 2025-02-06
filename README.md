@@ -64,26 +64,26 @@ Alpine x64
 ----------
 
   alpine-x64: Build the example Alpine x64 firmware and disk image
-  alpine-x64-bios-vm: Boot the disk.raw image in a virtual machien using BIOS
-  alpine-x64-efi-vm: Boot the disk.raw image in a virtual machine using EFI
+  alpine-x64-bios-vm: Boot the disk.img image in a virtual machine using BIOS
+  alpine-x64-efi-vm: Boot the disk.img image in a virtual machine using EFI
   alpine-x64-release: Copy versioned firmware and disk images to the "release" directory
   alpine-x64-clean: Remove build artifacts
 
   build/alpine/x64/rootfs.sqfs: Firmare image containing the rootfs and kernel
-  build/alpine/x64/disk.raw: Disk image that can booted in a VM, or written to an SD card, USB flash, etc and run on real x64 hardware
+  build/alpine/x64/disk.img: Disk image that can booted in a VM, or written to an SD card, USB flash, etc and run on real x64 hardware
 
 Alpine Orange Pi One
 --------------------
 
   alpine-orangepi-one: Build the example Alpine Orange Pi One firmware and disk image
-  alpine-orangepi-one-vm: Boot the disk.raw image in a virtual machine
+  alpine-orangepi-one-vm: Boot disk.img in a virtual machine
   alpine-orangepi-one-release: Copy versioned firmware and disk images to the "release" directory
   alpine-orangepi-one-clean: Remove build artifacts
 
   build/alpine/orangepi-one/rootfs.sqfs: Firmware image containing the rootfs and kernel
-  build/alpine/orangepi-one/disk.raw: Disk image that can be booted in the VM, or written to an SD card and run on an Orange Pi One
+  build/alpine/orangepi-one/disk.img: Disk image that can be booted in the VM, or written to an SD card and run on an Orange Pi One
 
-makrocosm targets
+Makrocosm targets
 -----------------
 
 Run with "make VERBOSE=1 ..." to see make and tool trace

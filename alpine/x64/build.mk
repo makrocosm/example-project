@@ -7,35 +7,35 @@ all: alpine-x64
 release: alpine-x64-release
 
 .PHONY: alpine-x64
-alpine-x64: build/alpine/x64/disk.raw #? Build the example Alpine x64 firmware and disk image
+alpine-x64: build/alpine/x64/disk.img #? Build the example Alpine x64 firmware and disk image
 
 .PHONY: alpine-x64-bios-vm
-alpine-x64-bios-vm: #? Boot the disk.raw image in a virtual machien using BIOS
+alpine-x64-bios-vm: #? Boot the disk.img image in a virtual machine using BIOS
 	$(AT)qemu-system-x86_64 \
   	-machine pc \
   	-m 2G \
   	-nographic \
 		-netdev user,id=net1,net=10.0.1.0/24 -device e1000,netdev=net1 \
-		-drive id=drive0,file="build/alpine/x64/disk.raw",format=raw,if=virtio
+		-drive id=drive0,file="build/alpine/x64/disk.img",format=raw,if=virtio
 
 .PHONY: alpine-x64-efi-vm
-alpine-x64-efi-vm: #? Boot the disk.raw image in a virtual machine using EFI
+alpine-x64-efi-vm: #? Boot the disk.img image in a virtual machine using EFI
 	$(AT)qemu-system-x86_64 \
   	-machine pc \
   	-m 2G \
   	-nographic \
   	-bios /usr/share/qemu/OVMF.fd \
 		-netdev user,id=net1,net=10.0.1.0/24 -device e1000,netdev=net1 \
-		-drive id=drive0,file="build/alpine/x64/disk.raw",format=raw,if=virtio
+		-drive id=drive0,file="build/alpine/x64/disk.img",format=raw,if=virtio
 
 .PHONY: alpine-x64-release
 alpine-x64-release: #? Copy versioned firmware and disk images to the "release" directory
 alpine-x64-release: \
 		build/alpine/x64/rootfs.sqfs \
-		build/alpine/x64/disk.raw
+		build/alpine/x64/disk.img
 	mkdir -p release
 	cp build/alpine/x64/rootfs.sqfs release/alpine-x64-image-$(RELEASE_VERSION).bin
-	cp build/alpine/x64/disk.raw release/alpine-x64-disk-$(RELEASE_VERSION).raw
+	cp build/alpine/x64/disk.img release/alpine-x64-disk-$(RELEASE_VERSION).img
 
 .PHONY: alpine-x64-clean
 alpine-x64-clean: #? Remove build artifacts
@@ -74,8 +74,8 @@ build/alpine/x64/disk/bootenv.fat: \
 
 # Disk image with GRUB bootloader using BIOS boot or EFI,
 # symmetric A/B rootfs, config overlay, and user data
-build/alpine/x64/disk.raw: #? Disk image that can booted in a VM, or written to an SD card, USB flash, etc and run on real x64 hardware
-build/alpine/x64/disk.raw: \
+build/alpine/x64/disk.img: #? Disk image that can booted in a VM, or written to an SD card, USB flash, etc and run on real x64 hardware
+build/alpine/x64/disk.img: \
 		build/alpine/x64/disk/bios.fat \
 		build/alpine/x64/disk/bootenv.fat \
 		build/alpine/x64/disk/efi.fat \
