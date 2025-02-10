@@ -3,7 +3,7 @@
 #? =========================
 #?
 
-RELEASE_VERSION = $(shell git describe --dirty --tag --always)
+export RELEASE_VERSION = $(shell git describe --dirty --tag --always)
 
 .PHONY: all
 all: #? Build firmware and disk images for all platforms

@@ -35,3 +35,6 @@ COPY etc /etc
 
 # Example applications
 COPY --from=alpine-common-apps /bin /bin
+
+ARG ETC_VERSION
+RUN echo "$ETC_VERSION" > /etc/version
