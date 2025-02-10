@@ -28,7 +28,9 @@ RUN cd /etc/init.d \
 RUN cp /etc/conf.d/agetty /etc/conf.d/agetty.console
 RUN rc-update add agetty.console default
 
-RUN passwd -d root root
+# Username: root
+# Password: default
+RUN echo root:default | chpasswd
 
 RUN mkdir /mnt/config /mnt/userdata
 
