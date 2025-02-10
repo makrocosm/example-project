@@ -10,7 +10,7 @@ RUN --mount=type=cache,id=${TARGETARCH}/var/cache/apk,target=/var/cache/apk \
   apk update \
   && apk add openrc mdevd agetty iproute2 openssh
 
-RUN echo "rc_verbose=yes" >> /etc/rc.conf
+#RUN echo "rc_verbose=yes" >> /etc/rc.conf
 
 RUN rc-update add hostname boot
 RUN rc-update add procfs boot
