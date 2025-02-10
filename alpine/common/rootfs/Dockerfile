@@ -12,13 +12,15 @@ RUN --mount=type=cache,id=${TARGETARCH}/var/cache/apk,target=/var/cache/apk \
 
 #RUN echo "rc_verbose=yes" >> /etc/rc.conf
 
+# Start some system services
 RUN rc-update add hostname boot
 RUN rc-update add procfs boot
 RUN rc-update add sysfs boot
 RUN rc-update add devfs boot
 RUN rc-update add mdevd-init boot
-RUN rc-update add networking boot
+
 RUN rc-update add mdevd default
+RUN rc-update add networking default
 RUN rc-update add sshd default
 
 RUN cd /etc/init.d \
