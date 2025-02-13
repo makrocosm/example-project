@@ -3,12 +3,19 @@
 An example project using the [Makrocosm](https://www.github.com/makrocosm/makrocosm)
 build system to create minimal Alpine-based firmware for a variety of platforms.
 
-Supported platforms:
+Platforms:
 
  - Generic x64
    - BIOS and EFI Grub bootloader
    - Disk image can be written to USB flash, harddrive, etc, and booted on real hardware
    - Disk image can be booted in VM
+ - Raspberry Pi (ARM64)
+   - u-boot bootloader
+   - Disk image can be written to SD card and booted on real hardware
+   - Supports Raspberry Pi models compatible with the BCM2711 kernel. Tested on:
+     - Raspberry Pi 4 Model B Rev 1.1
+     - Raspberry Pi 3 Model B Rev 1.2
+   - Console on UART0 (TX GPIO 14 & RX GPIO15) @ 115200 baud
  - Orange Pi One (ARM)
    - u-boot bootloader
    - Disk image can be written to SD card and booted on real hardware
@@ -82,6 +89,16 @@ Alpine Orange Pi One
 
   build/alpine/orangepi-one/rootfs.sqfs: Firmware image containing the rootfs and kernel
   build/alpine/orangepi-one/disk.img: Disk image that can be booted in the VM, or written to an SD card and run on an Orange Pi One
+
+Alpine Raspberry Pi
+-------------------
+
+  alpine-rpi: Build the example Alpine Raspberry Pi firmware and disk image
+  alpine-rpi-release: Copy versioned firmware and disk images to the "release" directory
+  alpine-rpi-clean: Remove build artifacts
+
+  build/alpine/rpi/rootfs.sqfs: Firmware image containing the rootfs and kernel
+  build/alpine/rpi/disk.img: Disk image that can be written to an SD card and run on a Raspberry Pi
 
 Makrocosm targets
 -----------------

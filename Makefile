@@ -17,4 +17,5 @@ release: #? Copy all platforms' versioned firmware and disk images to the "relea
 include alpine/common/build.mk
 include alpine/x64/build.mk
 include alpine/orangepi-one/build.mk
+include alpine/rpi/build.mk
 include makrocosm/rules.mk

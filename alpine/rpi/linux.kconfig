@@ -1,0 +1,3 @@
+# For netbooting rootfs.sqfs
+CONFIG_BLK_DEV_RAM_COUNT=4
+CONFIG_BLK_DEV_RAM_SIZE=131070

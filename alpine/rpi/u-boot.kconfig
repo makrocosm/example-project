@@ -1,0 +1,6 @@
+# print firmware version from image partition
+CONFIG_CMD_CAT=y
+
+# netload
+CONFIG_BLKMAP=y
+CONFIG_CMD_BLKMAP=y
