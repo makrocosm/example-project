@@ -16,6 +16,6 @@ jobs:
     - name: Install dependencies
       run: make deps
     - name: Build
-      run: make VERBOSE=1
+      run: make VERBOSE=1 VERBOSE_WORKSPACE=1
     - name: Prepare release files
       run: make release
