@@ -15,7 +15,12 @@ jobs:
         sudo systemctl restart docker
     - name: Install dependencies
       run: make deps
-    - name: Build
-      run: make VERBOSE=1 VERBOSE_WORKSPACE=1
-    - name: Prepare release files
-      run: make release
+    - name: Build Alpine Generic x64 target
+      run: make alpine-x64-release
+    - name: Build Alpine Raspberry Pi target
+      run: make alpine-rpi-release
+    - name: Build Alpine Orange Pi One target
+      run: make alpine-orangepi-one-release
+    - uses: actions/upload-artifact@v4
+      with:
+        path: release
