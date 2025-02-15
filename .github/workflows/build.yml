@@ -25,4 +25,13 @@ jobs:
       run: make alpine-orangepi-one-release
     - uses: actions/upload-artifact@v4
       with:
-        path: release
+        name: makrocosm-alpine-x64-firmware
+        path: release/alpine-x64-*
+    - uses: actions/upload-artifact@v4
+      with:
+        name: makrocosm-alpine-rpi-firmware
+        path: release/alpine-rpi-*
+    - uses: actions/upload-artifact@v4
+      with:
+        name: makrocosm-alpine-orangepi-one-firmware
+        path: release/alpine-orangepi-one-*
