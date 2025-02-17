@@ -2,7 +2,7 @@
 # A custom workspace that extends Makrocosm's Ubuntu 24.04 workspace
 #
 
-FROM makrocosm-workspace-ubuntu-24.04
+FROM mep-makrocosm-workspace-ubuntu-24.04
 
 # Add qemu for installing the x64 Grub bootloader in a VM, and
 # testing out various targets in a VM
