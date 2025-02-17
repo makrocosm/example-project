@@ -1,4 +1,4 @@
-FROM alpine-x64-rootfs AS build
+FROM mep-alpine-x64-rootfs AS build
 RUN grub-editenv /grubenv set default=0
 RUN grub-editenv /grubenv set timeout=2
 

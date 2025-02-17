@@ -3,7 +3,7 @@
 # Add any other common rootfs image.
 #
 
-FROM alpine-common-base
+FROM mep-alpine-common-base
 ARG TARGETARCH
 
 RUN --mount=type=cache,id=${TARGETARCH}/var/cache/apk,target=/var/cache/apk \

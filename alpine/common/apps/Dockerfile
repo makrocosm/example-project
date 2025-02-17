@@ -8,7 +8,7 @@
 # compile of the applications.
 #
 
-FROM alpine-common-base AS dev
+FROM mep-alpine-common-base AS dev
 ARG TARGETARCH
 
 RUN --mount=type=cache,id=${TARGETARCH}/var/cache/apk,target=/var/cache/apk \

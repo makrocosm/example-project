@@ -1,4 +1,4 @@
-FROM alpine-common-base AS build
+FROM mep-alpine-common-base AS build
 ARG TARGETARCH
 
 RUN --mount=type=cache,id=${TARGETARCH}/var/cache/apk,target=/var/cache/apk \

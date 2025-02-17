@@ -1,7 +1,7 @@
 #
 # Alpine Raspberry Pi 4 rootfs image
 #
-FROM alpine-common-rootfs
+FROM mep-alpine-common-rootfs
 ARG TARGETARCH
 
 # Kernel and modules from linux context specified in container.cfg's BUILD_CONTEXTS
