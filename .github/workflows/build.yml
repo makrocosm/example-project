@@ -3,7 +3,8 @@ on:
   push:
     branches: [ "main" ]
 jobs:
-  build:
+  alpine-x64:
+    name: Makrocosm Alpine x64 firmware
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -19,19 +20,49 @@ jobs:
       run: make deps
     - name: Build Alpine Generic x64 target
       run: make alpine-x64-release
+    - uses: actions/upload-artifact@v4
+      with:
+        name: makrocosm-alpine-x64-firmware
+        path: release
+  alpine-rpi:
+    name: Makrocosm Alpine Raspberry Pi firmware
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+    - name: Enable containerd image store
+      run: |
+        sudo sh -c "echo '{ \"features\": { \"containerd-snapshotter\": true } }' > /etc/docker/daemon.json"
+        sudo systemctl restart docker
+    - name: Setup environment
+      run: echo "MAKROCOSM_GIT_CLONE_SHALLOW=1" >> $GITHUB_ENV
+    - name: Build workspace and install cross-compile dependencies
+      run: make deps
     - name: Build Alpine Raspberry Pi target
       run: make alpine-rpi-release
+    - uses: actions/upload-artifact@v4
+      with:
+        name: makrocosm-alpine-rpi-firmware
+        path: release
+  alpine-orangepi-one:
+    name: Makrocosm Alpine Orange Pi One firmware
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+    - name: Enable containerd image store
+      run: |
+        sudo sh -c "echo '{ \"features\": { \"containerd-snapshotter\": true } }' > /etc/docker/daemon.json"
+        sudo systemctl restart docker
+    - name: Setup environment
+      run: echo "MAKROCOSM_GIT_CLONE_SHALLOW=1" >> $GITHUB_ENV
+    - name: Build workspace and install cross-compile dependencies
+      run: make deps
     - name: Build Alpine Orange Pi One target
       run: make alpine-orangepi-one-release
     - uses: actions/upload-artifact@v4
       with:
-        name: makrocosm-alpine-x64-firmware
-        path: release/alpine-x64-*
-    - uses: actions/upload-artifact@v4
-      with:
-        name: makrocosm-alpine-rpi-firmware
-        path: release/alpine-rpi-*
-    - uses: actions/upload-artifact@v4
-      with:
         name: makrocosm-alpine-orangepi-one-firmware
-        path: release/alpine-orangepi-one-*
+        path: release
