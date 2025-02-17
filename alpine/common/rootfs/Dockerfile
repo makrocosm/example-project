@@ -38,7 +38,7 @@ RUN mkdir /mnt/config /mnt/userdata
 COPY etc /etc
 
 # Example applications
-COPY --from=alpine-common-apps /bin /bin
+COPY --from=mep-alpine-common-apps /bin /bin
 
 ARG ETC_VERSION
 RUN echo "$ETC_VERSION" > /etc/version
