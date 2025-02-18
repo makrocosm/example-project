@@ -3,7 +3,7 @@ on:
   push:
     branches: [ "main" ]
 jobs:
-  alpine-x64:
+  x64-alpine:
     name: Makrocosm Alpine x64 firmware
     runs-on: ubuntu-latest
     steps:
@@ -18,13 +18,13 @@ jobs:
       run: echo "MAKROCOSM_GIT_CLONE_SHALLOW=1" >> $GITHUB_ENV
     - name: Build workspace and install cross-compile dependencies
       run: make deps
-    - name: Build Alpine Generic x64 target
-      run: make alpine-x64-release
+    - name: Build target
+      run: make x64-alpine-release
     - uses: actions/upload-artifact@v4
       with:
-        name: makrocosm-alpine-x64-firmware
+        name: makrocosm-x64-alpine-firmware
         path: release
-  alpine-rpi:
+  rpi-alpine:
     name: Makrocosm Alpine Raspberry Pi firmware
     runs-on: ubuntu-latest
     steps:
@@ -39,13 +39,13 @@ jobs:
       run: echo "MAKROCOSM_GIT_CLONE_SHALLOW=1" >> $GITHUB_ENV
     - name: Build workspace and install cross-compile dependencies
       run: make deps
-    - name: Build Alpine Raspberry Pi target
-      run: make alpine-rpi-release
+    - name: Build target
+      run: make rpi-alpine-release
     - uses: actions/upload-artifact@v4
       with:
-        name: makrocosm-alpine-rpi-firmware
+        name: makrocosm-rpi-alpine-firmware
         path: release
-  alpine-orangepi-one:
+  opi1-alpine:
     name: Makrocosm Alpine Orange Pi One firmware
     runs-on: ubuntu-latest
     steps:
@@ -61,8 +61,8 @@ jobs:
     - name: Build workspace and install cross-compile dependencies
       run: make deps
     - name: Build Alpine Orange Pi One target
-      run: make alpine-orangepi-one-release
+      run: make opi1-alpine-release
     - uses: actions/upload-artifact@v4
       with:
-        name: makrocosm-alpine-orangepi-one-firmware
+        name: makrocosm-opi1-alpine-firmware
         path: release

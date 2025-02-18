@@ -21,8 +21,8 @@ build/workspace: build/makrocosm/workspace/ubuntu-24.04
 
 #?
 
-include alpine/common/build.mk
-include alpine/x64/build.mk
-include alpine/orangepi-one/build.mk
-include alpine/rpi/build.mk
+include common/alpine/build.mk
+include platform/x64/build.mk
+include platform/opi1/build.mk
+include platform/rpi/build.mk
 include makrocosm/rules.mk

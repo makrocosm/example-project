@@ -70,35 +70,35 @@ Makrocosm example project
 Alpine x64
 ----------
 
-  alpine-x64: Build the example Alpine x64 firmware and disk image
-  alpine-x64-bios-vm: Boot the disk.img image in a virtual machine using BIOS
-  alpine-x64-efi-vm: Boot the disk.img image in a virtual machine using EFI
-  alpine-x64-release: Copy versioned firmware and disk images to the "release" directory
-  alpine-x64-clean: Remove build artifacts
+  x64-alpine: Build the example Alpine x64 firmware and disk image
+  x64-alpine-bios-vm: Boot the disk.img image in a virtual machine using BIOS
+  x64-alpine-efi-vm: Boot the disk.img image in a virtual machine using EFI
+  x64-alpine-release: Copy versioned firmware and disk images to the "release" directory
+  x64-alpine-clean: Remove build artifacts
 
-  build/alpine/x64/rootfs.sqfs: Firmare image containing the rootfs and kernel
-  build/alpine/x64/disk.img: Disk image that can booted in a VM, or written to an SD card, USB flash, etc and run on real x64 hardware
+  build/platform/x64/rootfs.sqfs: Firmare image containing the rootfs and kernel
+  build/platform/x64/disk.img: Disk image that can booted in a VM, or written to an SD card, USB flash, etc and run on real x64 hardware
 
 Alpine Orange Pi One
 --------------------
 
-  alpine-orangepi-one: Build the example Alpine Orange Pi One firmware and disk image
-  alpine-orangepi-one-vm: Boot disk.img in a virtual machine
-  alpine-orangepi-one-release: Copy versioned firmware and disk images to the "release" directory
-  alpine-orangepi-one-clean: Remove build artifacts
+  opi1-alpine: Build the example Alpine Orange Pi One firmware and disk image
+  opi1-alpine-vm: Boot disk.img in a virtual machine
+  opi1-alpine-release: Copy versioned firmware and disk images to the "release" directory
+  opi1-alpine-clean: Remove build artifacts
 
-  build/alpine/orangepi-one/rootfs.sqfs: Firmware image containing the rootfs and kernel
-  build/alpine/orangepi-one/disk.img: Disk image that can be booted in the VM, or written to an SD card and run on an Orange Pi One
+  build/platform/opi1/rootfs.sqfs: Firmware image containing the rootfs and kernel
+  build/platform/opi1/disk.img: Disk image that can be booted in the VM, or written to an SD card and run on an Orange Pi One
 
 Alpine Raspberry Pi
 -------------------
 
-  alpine-rpi: Build the example Alpine Raspberry Pi firmware and disk image
-  alpine-rpi-release: Copy versioned firmware and disk images to the "release" directory
-  alpine-rpi-clean: Remove build artifacts
+  rpi-alpine: Build the example Alpine Raspberry Pi firmware and disk image
+  rpi-alpine-release: Copy versioned firmware and disk images to the "release" directory
+  rpi-alpine-clean: Remove build artifacts
 
-  build/alpine/rpi/rootfs.sqfs: Firmware image containing the rootfs and kernel
-  build/alpine/rpi/disk.img: Disk image that can be written to an SD card and run on a Raspberry Pi
+  build/platform/rpi/rootfs.sqfs: Firmware image containing the rootfs and kernel
+  build/platform/rpi/disk.img: Disk image that can be written to an SD card and run on a Raspberry Pi
 
 Makrocosm targets
 -----------------
