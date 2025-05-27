@@ -66,3 +66,24 @@ jobs:
       with:
         name: makrocosm-opi1-alpine-firmware
         path: release
+  bplay-alpine:
+    name: Makrocosm Alpine BeaglePlay
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+    - name: Enable containerd image store
+      run: |
+        sudo sh -c "echo '{ \"features\": { \"containerd-snapshotter\": true } }' > /etc/docker/daemon.json"
+        sudo systemctl restart docker
+    - name: Setup environment
+      run: echo "MAKROCOSM_GIT_CLONE_SHALLOW=1" >> $GITHUB_ENV
+    - name: Build workspace and install cross-compile dependencies
+      run: make deps
+    - name: Build Alpine BeaglePlay target
+      run: make bplay-alpine-release
+    - uses: actions/upload-artifact@v4
+      with:
+        name: makrocosm-bplay-alpine-firmware
+        path: release

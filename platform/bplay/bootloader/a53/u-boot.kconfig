@@ -1,0 +1,24 @@
+CONFIG_ENV_IS_IN_FAT=y
+
+# => mmc list
+# mmc@fa10000: 0 (eMMC)
+# mmc@fa00000: 1 (SD)
+# mmc@fa20000: 2
+CONFIG_ENV_FAT_DEVICE_AND_PART="1:auto"
+
+# match fw_env.config
+CONFIG_ENV_SIZE=0x4000
+
+CONFIG_ENV_OVERWRITE=y
+
+# for .scr scripts
+CONFIG_LEGACY_IMAGE_FORMAT=y
+
+CONFIG_BOOTCOMMAND=""
+
+# print firmware version from image partition
+CONFIG_CMD_CAT=y
+
+# netload
+CONFIG_BLKMAP=y
+CONFIG_CMD_BLKMAP=y
