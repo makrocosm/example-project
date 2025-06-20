@@ -25,5 +25,6 @@ include common/alpine/build.mk
 include platform/x64/build.mk
 include platform/opi1/build.mk
 include platform/rpi/build.mk
+#include platform/bbblack/build.mk
 include platform/bplay/build.mk
 include makrocosm/rules.mk

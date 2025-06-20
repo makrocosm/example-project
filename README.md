@@ -21,6 +21,10 @@ Platforms:
    - Disk image can be written to SD card and booted on real hardware (press USR during reset to boot from SD card)
    - Does not currently support booting from eMMC (requires revised boot scripts and default environment)
    - Console on UART header @ 115200 baud
+ - BeagleBone Black (ARM)
+   - u-boot bootloader
+   - Disk image can be written to SD card and booted on real hardware
+   - Console on ??? @ 115200 baud
  - Orange Pi One (ARM)
    - u-boot bootloader
    - Disk image can be written to SD card and booted on real hardware
