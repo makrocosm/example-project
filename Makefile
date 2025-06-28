@@ -4,7 +4,7 @@
 #?
 
 export RELEASE_VERSION = $(shell git describe --dirty --tag --always)
-export DOCKER_TAG_PREFIX = mep-
+export DOCKER_IMAGE_REF_PREFIX = mep-
 
 # Use a custom workspace that extends Makrocosm's Ubuntu 24.04 workspace
 WORKSPACE = workspace
